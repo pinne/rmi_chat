@@ -11,6 +11,7 @@ import java.rmi.*;
 interface ChatInterface extends Remote {
 	
 	public void sendMessage(Notifiable n, String s) throws RemoteException;
+	public void sendCommand(Notifiable n, String s) throws RemoteException;
 
     /* Called by clients to register for server callbacks
      */

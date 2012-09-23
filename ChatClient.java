@@ -13,13 +13,21 @@ import java.util.Scanner;
 public class ChatClient extends UnicastRemoteObject implements Notifiable
 {
 	private ChatInterface chatInterface; // Reference to remote server object
-	private String product;
+	public String nick = "brittmarie";
 	
 	public ChatClient(ChatInterface chatInterface) throws RemoteException {
 		super();
 		this.chatInterface = chatInterface;
 	}
 	
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String n) {
+		this.nick = n;
+	}
+
     public void notifyMessage(String m) throws RemoteException {
 		System.out.println(m);
 	}
@@ -63,6 +71,8 @@ public class ChatClient extends UnicastRemoteObject implements Notifiable
 			if (line.startsWith("/q")) {
 				//chatInterface.sendCommand(line);
 				break;
+			} else if (line.startsWith("/")) {
+				chatInterface.sendCommand(this, line);
 			} else {
 				chatInterface.sendMessage(this, line);
 			}

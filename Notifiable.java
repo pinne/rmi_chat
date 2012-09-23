@@ -9,8 +9,8 @@
 import java.rmi.*;
 
 public interface Notifiable extends Remote {
-	String nick = "client";
-	
     public void notifyMessage(String m) throws RemoteException;
+	public String getNick() throws RemoteException;
+	public void setNick(String n) throws RemoteException;
 }
 

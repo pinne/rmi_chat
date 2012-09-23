@@ -23,7 +23,7 @@ public class Server extends UnicastRemoteObject implements ChatInterface
 
 	synchronized public void sendMessage(Notifiable n, String s) throws RemoteException {
 		// Replace <client> with actual nick from Notifiable.
-		s = n.getNick() + "> " + s;
+		s = "<" + n.getNick() + "> " + s;
 		for (Notifiable client : clientList) {
 			client.notifyMessage(s);
 		}
@@ -41,8 +41,15 @@ public class Server extends UnicastRemoteObject implements ChatInterface
 
 				sendMessage(n, "" + oldNick + "changed nick to " + newNick);
 			}
-		}
+		} else if (s.startsWith("/w")) {
+            String whoAreConnected = "";
+            for (Notifiable client : clientList) {
+                whoAreConnected += client.getNick() + " ";
+            }
+            n.notifyMessage(whoAreConnected);
+        }
 	}
+
 	/* Called by clients to register for server callbacks
 	*/
 	synchronized public void registerForNotification(Notifiable n) throws RemoteException {

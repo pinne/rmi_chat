@@ -70,6 +70,7 @@ public class Server extends UnicastRemoteObject implements ChatInterface
 	*/
 	synchronized public void registerForNotification(Notifiable n) throws RemoteException {
 		clientList.add(n);
+		n.notifyMessage("Welcome to the server " + n.getNick());
 		n.notifyMessage(printHelp());
 		for (Notifiable client : clientList) {
 			client.notifyMessage("-!- " + n.getNick() + " has joined the server");

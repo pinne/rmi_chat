@@ -64,7 +64,7 @@ public class ChatClient extends UnicastRemoteObject implements Notifiable
 				//chatInterface.sendCommand(line);
 				break;
 			} else {
-				chatInterface.sendMessage(line);
+				chatInterface.sendMessage(this, line);
 			}
 		}
 

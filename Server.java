@@ -21,11 +21,11 @@ public class Server extends UnicastRemoteObject implements ChatInterface
 		clientList = new ArrayList<Notifiable>();
     }
 
-	synchronized public void sendMessage(String s) throws RemoteException {
+	synchronized public void sendMessage(Notifiable n, String s) throws RemoteException {
 		// Replace <client> with actual nick from Notifiable.
-		s = "<client> " + s;
-		for (Notifiable n : clientList) {
-			n.notifyMessage(s);
+		s = n.nick + "> " + s;
+		for (Notifiable client : clientList) {
+			client.notifyMessage(s);
 		}
 	}
 

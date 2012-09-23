@@ -39,7 +39,9 @@ public class Server extends UnicastRemoteObject implements ChatInterface
 				String newNick = st.nextToken();
 				n.setNick(newNick);
 
-				sendMessage(n, "" + oldNick + "changed nick to " + newNick);
+				for (Notifiable client : clientList) {
+					client.notifyMessage("-!- " + oldNick + " is known as " + newNick);
+				}
 			}
 		} else if (s.startsWith("/w")) {
             String whoAreConnected = "";

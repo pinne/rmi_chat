@@ -68,7 +68,7 @@ public class ChatClient extends UnicastRemoteObject implements Notifiable
 		while (true) {
 			line = scan.nextLine();
 			if (line.startsWith("/q")) {
-				//chatInterface.sendCommand(line);
+				chatInterface.sendCommand(this, line);
 				break;
 			} else if (line.startsWith("/")) {
 				chatInterface.sendCommand(this, line);
@@ -79,7 +79,7 @@ public class ChatClient extends UnicastRemoteObject implements Notifiable
 
 		System.out.println("Exiting...");
 		// Important: Deregister for notifiation from server!
-		chatInterface.deRegisterForNotification(this);
+		//chatInterface.deRegisterForNotification(this);
 		// Terminate the thread associated with rmi calls
 		System.exit(0);
 	}

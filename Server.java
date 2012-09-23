@@ -51,6 +51,8 @@ public class Server extends UnicastRemoteObject implements ChatInterface
             n.notifyMessage(whoAreConnected);
         } else if (s.startsWith("/h")) {
 			n.notifyMessage(printHelp());
+		} else if (s.startsWith("/q")) {
+			deRegisterForNotification(n);
 		}
 	}
 

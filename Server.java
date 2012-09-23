@@ -63,15 +63,22 @@ public class Server extends UnicastRemoteObject implements ChatInterface
 			+ "/help              this information\n";
 		return str;
 	}
+
 	/* Called by clients to register for server callbacks
 	*/
 	synchronized public void registerForNotification(Notifiable n) throws RemoteException {
 		clientList.add(n);
 		n.notifyMessage(printHelp());
+		for (Notifiable client : clientList) {
+			client.notifyMessage("-!- " + n.getNick() + " has joined the server");
+		}
 	}
 
 	synchronized public void deRegisterForNotification(Notifiable n) throws RemoteException {
 		clientList.remove(n);     	
+		for (Notifiable client : clientList) {
+			client.notifyMessage("-!- " + n.getNick() + " has left the server");
+		}
 	}
 
 	public static void main(String [] args) {

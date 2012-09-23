@@ -64,7 +64,6 @@ public class ChatClient extends UnicastRemoteObject implements Notifiable
 		Scanner scan = new Scanner(System.in);
 		char ans;
 		String line = "";
-		System.out.println("/q to quit");
 
 		while (true) {
 			line = scan.nextLine();

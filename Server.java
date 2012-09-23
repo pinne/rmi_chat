@@ -49,13 +49,25 @@ public class Server extends UnicastRemoteObject implements ChatInterface
                 whoAreConnected += client.getNick() + " ";
             }
             n.notifyMessage(whoAreConnected);
-        }
+        } else if (s.startsWith("/h")) {
+			n.notifyMessage(printHelp());
+		}
 	}
 
+	public String printHelp() {
+		String str = new String();
+		str = "Commands:\n"
+			+ "/quit              disconnects\n"
+			+ "/nick <nickname>   sets nick\n"
+			+ "/who               user list\n"
+			+ "/help              this information\n";
+		return str;
+	}
 	/* Called by clients to register for server callbacks
 	*/
 	synchronized public void registerForNotification(Notifiable n) throws RemoteException {
 		clientList.add(n);
+		n.notifyMessage(printHelp());
 	}
 
 	synchronized public void deRegisterForNotification(Notifiable n) throws RemoteException {

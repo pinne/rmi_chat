@@ -14,12 +14,12 @@ import java.util.*;
 public class Server extends UnicastRemoteObject implements ChatInterface
 {
 	/* The list of regisered clients */
-    private ArrayList<Notifiable> clientList = null;
+	private ArrayList<Notifiable> clientList = null;
 
-    public Server() throws RemoteException {
-    	super();
+	public Server() throws RemoteException {
+		super();
 		clientList = new ArrayList<Notifiable>();
-    }
+	}
 
 	synchronized public void sendMessage(Notifiable n, String s) throws RemoteException {
 		// Replace <client> with actual nick from Notifiable.
@@ -44,12 +44,12 @@ public class Server extends UnicastRemoteObject implements ChatInterface
 				}
 			}
 		} else if (s.startsWith("/w")) {
-            String whoAreConnected = "";
-            for (Notifiable client : clientList) {
-                whoAreConnected += client.getNick() + " ";
-            }
-            n.notifyMessage(whoAreConnected);
-        } else if (s.startsWith("/h")) {
+			String whoAreConnected = "";
+			for (Notifiable client : clientList) {
+				whoAreConnected += client.getNick() + " ";
+			}
+			n.notifyMessage(whoAreConnected);
+		} else if (s.startsWith("/h")) {
 			n.notifyMessage(printHelp());
 		} else if (s.startsWith("/q")) {
 			deRegisterForNotification(n);

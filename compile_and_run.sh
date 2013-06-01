@@ -15,6 +15,7 @@ javac $CLIENT.java;
 
 #RMI
 rmiregistry &
+sleep 3
 RMIPID=$!
 
 #Run
